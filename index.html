@@ -1,0 +1,1928 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025 上海跨年精緻之旅</title>
+    <style>
+        :root {
+            --color-primary: #208084;
+            --color-primary-hover: #1a6b73;
+            --color-secondary: #f5e6d3;
+            --color-accent: #d4a574;
+            --color-bg: #faf9f7;
+            --color-text: #1a1a1a;
+            --color-text-light: #666;
+            --color-success: #4caf50;
+            --color-warning: #ff9800;
+            --color-info: #2196f3;
+            --color-danger: #f44336;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #faf9f7 0%, #f0ebe3 100%);
+            color: var(--color-text);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-hover));
+            color: white;
+            padding: 40px 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(32, 128, 132, 0.15);
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        header .trip-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+            font-size: 0.95em;
+        }
+
+        header .info-item {
+            background: rgba(255,255,255,0.15);
+            padding: 10px 15px;
+            border-radius: 6px;
+            backdrop-filter: blur(10px);
+        }
+
+        .day-section {
+            background: white;
+            margin-bottom: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+
+        .day-header {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-hover) 100%);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .day-header:hover {
+            background: linear-gradient(135deg, var(--color-primary-hover) 0%, #145b5f 100%);
+        }
+
+        .day-header h2 {
+            font-size: 1.5em;
+            margin: 0;
+        }
+
+        .day-header .date-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+
+        .day-content {
+            padding: 25px;
+            max-height: 5000px;
+            transition: max-height 0.5s ease;
+            overflow: visible;
+        }
+
+        .day-content.collapsed {
+            max-height: 0;
+            padding: 0 25px;
+            overflow: hidden;
+        }
+
+        .day-map {
+            background: linear-gradient(135deg, #f0f9ff 0%, #f5f9ff 100%);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 2px dashed var(--color-primary);
+            text-align: center;
+            font-style: italic;
+            color: var(--color-text-light);
+        }
+
+        .day-intro {
+            background: linear-gradient(135deg, rgba(32, 128, 132, 0.05), rgba(212, 165, 116, 0.05));
+            padding: 15px;
+            border-left: 4px solid var(--color-primary);
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 0.95em;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .timeline-item:last-child {
+            border-bottom: none;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -35px;
+            top: 5px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--color-primary);
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px var(--color-primary);
+        }
+
+        .time-badge {
+            display: inline-block;
+            background: var(--color-primary);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .activity-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: 10px;
+        }
+
+        .activity-details {
+            background: var(--color-secondary);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-size: 0.95em;
+            border-left: 3px solid var(--color-accent);
+        }
+
+        .activity-image {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .detail-item {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: var(--color-primary);
+            min-width: 80px;
+        }
+
+        .emoji {
+            font-size: 1.2em;
+            min-width: 20px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .tab-button {
+            padding: 8px 16px;
+            background: white;
+            border: 2px solid var(--color-primary);
+            color: var(--color-primary);
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+        }
+
+        .tab-button:hover {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .tab-button.active {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+            border-left: 3px solid var(--color-info);
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .option-item {
+            background: white;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            border-left: 3px solid var(--color-info);
+        }
+
+        .option-title {
+            font-weight: 600;
+            color: var(--color-primary);
+            margin-bottom: 5px;
+        }
+
+        .option-detail {
+            font-size: 0.9em;
+            color: var(--color-text-light);
+            line-height: 1.5;
+        }
+
+        .note-box {
+            background: linear-gradient(135deg, #fff9e6 0%, #fff0e6 100%);
+            border-left: 4px solid var(--color-warning);
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 15px;
+            font-size: 0.95em;
+        }
+
+        .note-box strong {
+            color: var(--color-warning);
+        }
+
+        .tip-box {
+            background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%);
+            border-left: 4px solid var(--color-success);
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 15px;
+            font-size: 0.95em;
+        }
+
+        .tip-box strong {
+            color: var(--color-success);
+        }
+
+        .restaurant-card {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+
+        .restaurant-name {
+            font-weight: 600;
+            color: var(--color-primary);
+            margin-bottom: 5px;
+        }
+
+        .restaurant-info {
+            font-size: 0.9em;
+            color: var(--color-text-light);
+            line-height: 1.6;
+        }
+
+        .dish-recommendation {
+            background: linear-gradient(135deg, rgba(32, 128, 132, 0.05), rgba(212, 165, 116, 0.05));
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 10px;
+            border-left: 3px solid var(--color-accent);
+            font-size: 0.9em;
+        }
+
+        .dish-name {
+            font-weight: 600;
+            color: var(--color-accent);
+            margin-bottom: 3px;
+        }
+
+        .summary-box {
+            background: linear-gradient(135deg, rgba(32, 128, 132, 0.05), rgba(212, 165, 116, 0.05));
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border: 1px solid var(--color-primary);
+        }
+
+        .summary-title {
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: 10px;
+            font-size: 1.05em;
+        }
+
+        .landmark-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff6b6b, #ff8787);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            background: var(--color-primary);
+            color: white;
+            border-radius: 12px;
+            margin-top: 40px;
+        }
+
+        .expand-all {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .expand-btn {
+            padding: 12px 24px;
+            background: var(--color-primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .expand-btn:hover {
+            background: var(--color-primary-hover);
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .day-header h2 {
+                font-size: 1.2em;
+            }
+
+            .detail-label {
+                min-width: 70px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>✨ 2025/12/31 - 2026/01/04 上海跨年精緻之旅</h1>
+            <div class="trip-info">
+                <div class="info-item">📍 地點：上海</div>
+                <div class="info-item">🏨 酒店：靜安崑崙大酒店</div>
+                <div class="info-item">✈️ 往程：BR0712 (12:05 PVG)</div>
+                <div class="info-item">✈️ 返程：BR0721 (20:10 PVG)</div>
+            </div>
+        </header>
+
+        <div class="expand-all">
+            <button class="expand-btn" onclick="toggleAllDays()">展開全部 / 收起全部</button>
+        </div>
+
+        <!-- DAY 1 -->
+        <div class="day-section">
+            <div class="day-header" onclick="toggleDay(this)">
+                <div>
+                    <h2>📅 第一天：12/31 (週三) 抵達與高空跨年</h2>
+                    <p style="margin: 5px 0 0 0; font-size: 0.9em;">悠閒入住、飯店內高空晚餐跨年</p>
+                </div>
+                <div class="date-badge">5 項活動</div>
+            </div>
+            <div class="day-content">
+                <div class="day-map">
+                    <div style="margin-bottom: 15px; font-weight: 600; color: #208084;">🗺️ 今日路線地圖 (俯視圖)</div>
+                    <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/3a153c8a-396f-4016-a3dd-7fdb8134fdda" alt="Day 1 行程地圖" style="width: 100%; max-width: 600px; height: auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                    <div style="margin-top: 10px; font-size: 0.85em; color: var(--color-text-light);">
+                        <strong>🗺️ 路線說明：</strong>✈️ 浦東機場T2 → (地鐵2號線 90分鐘) → 🚇 靜安寺站 → (步行10分鐘) → 🏨 靜安崑崙大酒店 → 🍽️ 錦福軒(39樓)<br>
+                        <strong>💡 提示：</strong>地鐵2號線從機場直達靜安寺，是最便捷的方式。全程約2小時。
+                    </div>
+                </div>
+
+                <div class="day-intro">
+                    <strong>🎯 今日重點：</strong>順利抵達、入住飯店、錦福軒跨年晚餐。<br>
+                    <strong>⚠️ 特別提醒：</strong>跨年夜市區有嚴格交通管制，晚餐後強烈建議留在靜安寺區域，不要前往外灘/豫園。
+                </div>
+
+                <div class="timeline">
+                    <!-- Activity 1 -->
+                    <div class="timeline-item">
+                        <div class="time-badge">12:05</div>
+                        <div class="activity-title">✈️ 抵達上海</div>
+                        <div class="activity-details">
+                            <div class="detail-item">
+                                <span class="emoji">🛬</span>
+                                <div>
+                                    <div class="detail-label">航班</div>
+                                    <div>BR0712 抵達浦東機場 (PVG) T2航廈</div>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <span class="emoji">⏱️</span>
+                                <div>
+                                    <div class="detail-label">入境時間</div>
+                                    <div>約 1-1.5 小時 (入境+拿行李)</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="note-box">
+                            <strong>⚠️ 重要提醒：</strong>跨年日浦東機場人潮眾多，入關可能比平時多花 30 分鐘。建議耐心等候。
+                        </div>
+                    </div>
+
+                    <!-- Activity 2 -->
+                    <div class="timeline-item">
+                        <div class="time-badge">14:00</div>
+                        <div class="activity-title">🚇 前往市區</div>
+                        <div class="activity-details">
+                            <div class="detail-item">
+                                <span class="emoji">🚇</span>
+                                <div>
+                                    <div class="detail-label">推薦交通</div>
+                                    <div><strong>地鐵2號線</strong> (往徐涇東方向) ➡️「靜安寺站」1號口出</div>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <span class="emoji">⏱️</span>
+                                <div>
+                                    <div class="detail-label">耗時</div>
+                                    <div>約 90 分鐘</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Activity 3 -->
+                    <div class="timeline-item">
+                        <div class="time-badge">16:00</div>
+                        <div class="activity-title">🏨 辦理入住</div>
+                        <div class="activity-details">
+                            <div class="detail-item">
+                                <span class="emoji">🏨</span>
+                                <div>
+                                    <div class="detail-label">飯店</div>
+                                    <div><strong>靜安崑崙大酒店</strong> (The Kunlun Jing An)</div>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <span class="emoji">📍</span>
+                                <div>
+                                    <div class="detail-label">地址</div>
+                                    <div>靜安區南京西路1555號</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Activity 4 -->
+                    <div class="timeline-item">
+                        <div class="time-badge">19:00</div>
+                        <div class="activity-title">🍽️ 跨年晚餐：錦福軒</div>
+                        <div class="activity-details">
+                            <img src="https://pplx-res.cloudinary.com/image/upload/v1764783723/search_images/52376edc901a5408c64cb31b4c5767bb4d8c4c55.jpg" alt="錦福軒餐廳" class="activity-image">
+                            <div class="detail-item">
+                                <span class="emoji">🍽️</span>
+                                <div>
+                                    <div class="detail-label">餐廳</div>
+                                    <div><strong>錦福軒</strong> (EASEFUL CUISINE)</div>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <span class="emoji">📍</span>
+                                <div>
+                                    <div class="detail-label">位置</div>
+                                    <div>飯店 <strong>39樓</strong> (超級方便)</div>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <span class="emoji">🍲</span>
+                                <div>
+                                    <div class="detail-label">菜系</div>
+                                    <div>精緻粵菜/廣府菜，前身是米其林推薦餐廳</div>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <span class="emoji">💰</span>
+                                <div>
+                                    <div class="detail-label">預算</div>
+                                    <div>約 ¥300-500/人</div>
+                                </div>
+                            </div>
+                            <div class="landmark-badge">⭐ 必打卡：高空夜景，俯瞰城市燈火</div>
+                        </div>
+                        <div class="tabs">
+                            <button class="tab-button active" onclick="switchTab(this, 'booking1')">訂位步驟</button>
+                            <button class="tab-button" onclick="switchTab(this, 'menu1')">菜色推薦</button>
+                        </div>
+                        <div id="booking1" class="tab-content active">
+                            <strong>📞 訂位方式：</strong>
+                            <div class="option-item">
+                                <div class="option-title">方式 1：直接致電飯店</div>
+                                <div class="option-detail">撥打靜安崑崙大酒店前台，要求轉接錦福軒餐廳。告知日期、時間、人數，<strong>特別要求窗邊位</strong>。</div>
+                            </div>
+                            <div class="option-item">
+                                <div class="option-title">⚠️ 重要</div>
+                                <div class="option-detail"><strong>務必在出發前 1-2 週訂位！</strong>跨年夜是全年最滿的日子，晚訂可能無位。</div>
+                            </div>
+                        </div>
+                        <div id="menu1" class="tab-content">
+                            <strong>🍲 推薦菜色：</strong>
+                            <div class="dish-recommendation">
+                                <div class="dish-name">🌊 古法蔥油大黃魚</div>
+                                <div>鮮美黃魚搭配香蔥油，魚肉細嫩，蔥香四溢</div>
+                            </div>
+                            <div class="dish-recommendation">
+                                <div class="dish-name">🔥 茶香火焰肋排</div>
+                                <div>茶香與火焰結合，肋排軟嫩多汁，視覺震撼</div>
+                            </div>
+                            <div class="dish-recommendation">
+                                <div class="dish-name">🦀 蟹黃豆腐</div>
+                                <div>豆腐軟滑，蟹黃鮮香，是粵菜經典</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Activity 5 -->
+                    <div class="timeline-item">
+                        <div class="time-badge">22:00</div>
+                        <div class="activity-title">🎊 迎接 2026</div>
+                        <div class="activity-details">
+                            <div class="detail-item">
+                                <span class="emoji">🥂</span>
+                                <div>
+                                    <div class="detail-label">活動</div>
+                                    <div>晚餐後可至飯店 <strong>38樓行政酒廊</strong> 小酌，或回房間休息</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="summary-box">
+                    <div class="summary-title">📌 第一天行程總結</div>
+                    <strong>預算估算：</strong>地鐵 ¥7 + 晚餐 ¥300-500/人<br>
+                    <strong>體力指數：</strong>⭐☆☆☆☆ (輕鬆)<br>
+                    <strong>拍照指數：</strong>⭐⭐⭐⭐⭐ (超讚的跨年夜景)
+                </div>
+            </div>
+        </div>
+
+        <!-- DAY 2 -->
+        <div class="day-section">
+            <div class="day-header" onclick="toggleDay(this)">
+                <div>
+                    <h2>📅 第二天：01/01 (週四) 陸家嘴天際線 & 3號倉庫午餐</h2>
+                    <p style="margin: 5px 0 0 0; font-size: 0.9em;">登高觀景、3號倉庫午餐、外灘夜景</p>
+                </div>
+                <div class="date-badge">6 項活動</div>
+            </div>
+            <div class="day-content">
+                <div class="day-map">
+                    <div style="margin-bottom: 15px; font-weight: 600; color: #208084;">🗺️ 今日路線地圖 (陸家嘴天際線 - 俯視圖)</div>
+                    <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/0aa42051-8bdd-4553-95b0-477a01aa6d13" alt="Day 2 行程地圖" style="width: 100%; max-width: 600px; height: auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                    <div style="margin-top: 10px; font-size: 0.85em; color: var(--color-text-light);">
+                        <strong>🗺️ 路線說明：</strong>🚇 靜安寺站 → (地鐵2號線 8分鐘) → 陸家嘴站 → (步行5分鐘) → 上海中心118層 → (步行15分鐘) → 正大廣場3號倉庫 → (散步) → 外灘<br>
+                        <strong>💡 提示：</strong>今天是腿力挑戰日！全天步行超過15,000步。穿舒適的鞋子很重要。
+                    </div>
+                </div>
+
+                <div class="day-intro">
+                    <strong>🎯 今日重點：</strong>登上海中心、3號倉庫午餐、外灘夜景 (腿力挑戰日)。<br>
+                    <strong>💡 提示：</strong>這是行程中最「走動」的一天，穿舒適的鞋子很重要。
+                </div>
+
+                <div class="timeline">
+                    <!-- Activity 1 -->
+                    <div class="timeline-item">
+                        <div class="time-badge">10:00</div>
+                        <div class="activity-title">🚇 前往陸家嘴</div>
+                        <div class="activity-details">
+                            <div class="detail-item">
+                                <span class="emoji">🚇</span>
+                                <div>
+                                    <div class="detail-label">交通</div>
+                                    <div>靜安寺站搭 <strong>地鐵2號線</strong> ➡️「陸家嘴站」</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Activity 2 -->
+                    <div class="timeline-item">
+                        <div class="time-badge">10:30</div>
+                        <div class="activity-title">🏢 高空觀景 (上海中心118層)</div>
+                        <div class="activity-details">
+                            <img src="https://pplx-res.cloudinary.com/image/upload/v1764783722/search_images/34dbd1133c4a863c01d130948c8fd4ef6d7b9ef7.jpg" alt="上海中心觀景台" class="activity-image">
+                            <div class="detail-item">
+                                <span class="emoji">🏙️</span>
+                                <div>
+                                    <div class="detail-label">推薦景點</div>
+                                    <div><strong>上海中心大廈 (118層)</strong></div>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <span class="emoji">🎫</span>
+                                <div>
+                                    <div class="detail-label">門票</div>
+                                    <div>約 ¥180</div>
+                                </div>
+                            </div>
+                            <div class="landmark-badge">⭐ 必打卡：全球第四高樓，360度俯瞰上海</div>
+                        </div>
+                    </div>
+
+                    <!-- Activity 3 -->
+                    <div class="timeline-item">
+                        <div class="time-badge">12:30</div>
+                        <div class="activity-title">🍽️ 午餐：3號倉庫 (正大廣場店)</div>
+                        <div class="activity-details">
+                            <img src="https://pplx-res.cloudinary.com/image/upload/v1764783723/search_images/f52d712de1b8fac7438168202401df8e766e82fa.jpg" alt="3號倉庫餐廳" class="activity-image">
+                            <div class="detail-item">
+                                <span class="emoji">🍽️</span>
+                                <div>
+                                    <div class="detail-label">餐廳</div>
+                                    <div><strong>3號倉庫·創意中國菜</strong></div>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <span class="emoji">📍</span>
+                                <div>
+                                    <div class="detail-label">位置</div>
+                                    <div>陸家嘴西路168號 <strong>正大廣場 2樓</strong></div>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <span class="emoji">💰</span>
+                                <div>
+                                    <div class="detail-label">預算</div>
+                                    <div>約 ¥200-400/人</div>
+                                </div>
+                            </div>
+                            <div class="landmark-badge">⭐ 必打卡：科技感餐廳，每道菜都是藝術品</div>
+                        </div>
+                        <div class="tabs">
+                            <button class="tab-button active" onclick="switchTab(this, 'warehouse-menu')">必點菜色</button>
+                            <button class="tab-button" onclick="switchTab(this, 'warehouse-tips')">排隊訣竅</button>
+                        </div>
+                        <div id="warehouse-menu" class="tab-content active">
+                            <strong>🍲 必點菜色：</strong>
+                            <div class="dish-recommendation">
+                                <div class="dish-name">🌊 古法蔥油大黃魚</div>
+                                <div>嫩黃魚搭配金黃蔥油，鮮香四溢，必點</div>
+                            </div>
+                            <div class="dish-recommendation">
+                                <div class="dish-name">🔥 茶香火焰肋排</div>
+                                <div>火焰與茶香結合，視覺震撼，味道醇厚</div>
+                            </div>
+                            <div class="dish-recommendation">
+                                <div class="dish-name">⭐ 星空之旅</div>
+                                <div>水果沙拉 + 白巧克力，被燈光點亮，甜蜜夢幻</div>
+                            </div>
+                            <div class="dish-recommendation">
+                                <div class="dish-name">🦐 黑松露蝦球</div>
+                                <div>黑松露香氣加新鮮蝦仁，極致奢華</div>
+                            </div>
+                        </div>
+                        <div id="warehouse-tips" class="tab-content">
+                            <strong>📞 排隊訣竅：</strong>
+                            <div class="option-item">
+                                <div class="option-title">大眾點評取號</div>
+                                <div class="option-detail">下載大眾點評 APP，提前 1 小時在線取號，節省等待時間</div>
+                            </div>
+                            <div class="option-item">
+                                <div class="option-title">⚠️ 注意</div>
+                                <div class="option-detail">3號倉庫<strong>不接受提前訂位</strong>，只能現場或在線取號。元旦假期人超多，建議早到！</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Activity 4 -->
+                    <div class="timeline-item">
+                        <div class="time-badge">14:30</div>
+                        <div class="activity-title">🚶 濱江散步</div>
+                        <div class="activity-details">
+                            <div class="detail-item">
+                                <span class="emoji">🌳</span>
+                                <div>
+                                    <div class="detail-label">活動</div>
+                                    <div>在 <strong>濱江大道</strong> 散步消食</div>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <span class="emoji">📸</span>
+                                <div>
+                                    <div class="detail-label">景觀</div>
+                                    <div>看對岸外灘建築群，拍照打卡</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Activity 5 -->
+                    <div class="timeline-item">
+                        <div class="time-badge">18:00</div>
+                        <div class="activity-title">🥢 晚餐 (彈性)</div>
+                        <div class="activity-details">
+                            <div class="detail-item">
+                                <span class="emoji">🍜</span>
+                                <div>
+                                    <div class="detail-label">推薦選擇</div>
+                                    <div><strong>蟹叄寳 / 蟹家大院</strong> (蟹黃麵) 或 <strong>海底撈火鍋</strong></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tabs">
+                            <button class="tab-button active" onclick="switchTab(this, 'dinner-d2')">餐廳推薦</button>
+                        </div>
+                        <div id="dinner-d2" class="tab-content active">
+                            <strong>🍜 晚餐備選：</strong>
+                            <div class="restaurant-card">
+                                <div class="restaurant-name">🦀 蟹叄寳 / 蟹家大院</div>
+                                <div class="restaurant-info">
+                                    <strong>特色菜色：</strong><br>
+                                    • <strong>蟹黃麵</strong> - 湯濃郁，蟹香撲鼻，一吃就停不下來 ¥68<br>
+                                    • 蟹黃炒飯 - 飽滿蟹黃混入飯粒 ¥58<br>
+                                    <strong>人均：</strong>¥50-100
+                                </div>
+                            </div>
+                            <div class="restaurant-card">
+                                <div class="restaurant-name">🔥 海底撈火鍋</div>
+                                <div class="restaurant-info">
+                                    <strong>推薦菜色：</strong><br>
+                                    • 新鮮活蝦、活蟹、海鮮拼盤<br>
+                                    • 黑虎蝦 - 新鮮飽滿，甜度高<br>
+                                    • 各式菌菇、丸子<br>
+                                    <strong>人均：</strong>¥80-150
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Activity 6 -->
+                    <div class="timeline-item">
+                        <div class="time-badge">20:00</div>
+                        <div class="activity-title">🌃 外灘夜景 (自選)</div>
+                        <div class="activity-details">
+                            <img src="https://pplx-res.cloudinary.com/image/upload/v1764783722/search_images/6de16f40c9d15df07a2613e8394bc0eac50e9746.jpg" alt="外灘夜景" class="activity-image">
+                            <div class="detail-item">
+                                <span class="emoji">🚶</span>
+                                <div>
+                                    <div class="detail-label">步行路線</div>
+                                    <div>豫園步行至外灘約 <strong>15-20 分鐘</strong></div>
+                                </div>
+                            </div>
+                            <div class="landmark-badge">⭐ 必打卡：萬國建築群 + 黃浦江燈光秀</div>
+                        </div>
+                        <div class="tabs">
+                            <button class="tab-button active" onclick="switchTab(this, 'bund-walk')">外灘散步</button>
+                            <button class="tab-button" onclick="switchTab(this, 'bund-cruise')">黃浦江遊船</button>
+                        </div>
+                        <div id="bund-walk" class="tab-content active">
+                            <strong>🌃 外灘散步 (經典方案)：</strong>
+                            <div class="option-item">
+                                <div class="option-title">路線</div>
+                                <div class="option-detail">豫園商城 → 福佑路 → 河南南路 → 外灘觀景平台</div>
+                            </div>
+                            <div class="option-item">
+                                <div class="option-title">時間</div>
+                                <div class="option-detail">約 15-20 分鐘步行，停留 45-60 分鐘拍照</div>
+                            </div>
+                        </div>
+                        <div id="bund-cruise" class="tab-content">
+                            <strong>🚢 黃浦江遊船體驗 (加碼方案)：</strong>
+                            <div class="option-item">
+                                <div class="option-title">豪華遊船</div>
+                                <div class="option-detail"><strong>票價</strong>：¥150 | <strong>航程</strong>：45-60分鐘 | <strong>特色</strong>：室內空調、絕佳江景</div>
+                            </div>
+                            <div class="option-item">
+                                <div class="option-title">便宜渡輪</div>
+                                <div class="option-detail"><strong>票價</strong>：¥2 (!) | <strong>時間</strong>：5-10分鐘 | <strong>特色</strong>：CP值爆表</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="summary-box">
+                    <div class="summary-title">📌 第二天行程總結</div>
+                    <strong>預算估算：</strong>地鐵 ¥3 + 登樓 ¥180 + 午餐 ¥250 + 晚餐 ¥50-150 = 約 ¥483-633<br>
+                    <strong>體力指數：</strong>⭐⭐⭐⭐⭐ (腿力挑戰日)<br>
+                    <strong>拍照指數：</strong>⭐⭐⭐⭐⭐ (一整天都很上鏡)
+                </div>
+            </div>
+        </div>
+
+        <!-- DAY 3 -->
+        <div class="day-section">
+            <div class="day-header" onclick="toggleDay(this)">
+                <div>
+                    <h2>📅 第三天：01/02 (週五) 敘宴中午宴 & 豫園燈會晚遊</h2>
+                    <p style="margin: 5px 0 0 0; font-size: 0.9em;">沉浸式宮廷午宴、法租界漫步、豫園燈會</p>
+                </div>
+                <div class="date-badge">6 項活動</div>
+            </div>
+            <div class="day-content">
+                <div class="day-map">
+                    <div style="margin-bottom: 15px; font-weight: 600; color: #208084;">🗺️ 今日路線地圖 (敘宴&法租界&豫園 - 俯視圖)</div>
+                    <svg width="100%" height="350" viewBox="121.2 31.20 0.35 0.12" style="background: linear-gradient(135deg, #f0f9ff 0%, #f5f9ff 100%); border-radius: 8px;" preserveAspectRatio="xMidYMid meet">
+                        <defs>
+                            <pattern id="grid-day3" width="0.05" height="0.05" patternUnits="userSpaceOnUse">
+                                <path d="M 0.05 0 L 0 0 0 0.05" fill="none" stroke="#e8e8e8" stroke-width="0.003"/>
+                            </pattern>
+                            <marker id="arrowhead-day3" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="#208084"/>
+                            </marker>
+                        </defs>
+                        <rect x="121.2" y="31.20" width="0.35" height="0.12" fill="url(#grid-day3)"/>
+                        
+                        <!-- 地鐵路線(淡化) -->
+                        <line x1="121.264" y1="31.271" x2="121.264" y2="31.24" stroke="#ef4444" stroke-width="0.006" opacity="0.4"/>
+                        
+                        <!-- 主路線 -->
+                        <polyline points="121.273,31.275 121.280,31.288 121.430,31.294 121.437,31.291 121.487,31.229" 
+                                  stroke="#208084" stroke-width="0.006" fill="none" stroke-dasharray="0.008,0.008" marker-end="url(#arrowhead-day3)"/>
+                        
+                        <!-- 景點標記 -->
+                        <!-- 靜安寺/飯店 -->
+                        <circle cx="121.273" cy="31.275" r="0.009" fill="#4caf50" opacity="0.25"/>
+                        <circle cx="121.273" cy="31.275" r="0.006" fill="#4caf50"/>
+                        <text x="121.273" y="31.277" text-anchor="middle" font-size="0.015">🏨</text>
+                        
+                        <!-- 敘宴 -->
+                        <circle cx="121.280" cy="31.288" r="0.009" fill="#ff6b6b" opacity="0.25"/>
+                        <circle cx="121.280" cy="31.288" r="0.006" fill="#ff6b6b"/>
+                        <text x="121.280" y="31.290" text-anchor="middle" font-size="0.015">🎭</text>
+                        
+                        <!-- 武康大樓 -->
+                        <circle cx="121.430" cy="31.294" r="0.009" fill="#ffc107" opacity="0.25"/>
+                        <circle cx="121.430" cy="31.294" r="0.006" fill="#ffc107"/>
+                        <text x="121.430" y="31.296" text-anchor="middle" font-size="0.015">🏛️</text>
+                        
+                        <!-- 豫園 -->
+                        <circle cx="121.487" cy="31.229" r="0.009" fill="#ff9800" opacity="0.25"/>
+                        <circle cx="121.487" cy="31.229" r="0.006" fill="#ff9800"/>
+                        <text x="121.487" y="31.231" text-anchor="middle" font-size="0.015">🏮</text>
+                        
+                        <!-- 周邊地標 -->
+                        <circle cx="121.437" cy="31.291" r="0.006" fill="#9c27b0" opacity="0.12"/>
+                        <text x="121.437" y="31.293" text-anchor="middle" font-size="0.010" fill="#666" opacity="0.5">安福路</text>
+                        
+                        <!-- 標籤 -->
+                        <text x="121.273" y="31.300" text-anchor="middle" font-size="0.011" fill="#333" font-weight="500">靜安寺/飯店</text>
+                        <text x="121.280" y="31.305" text-anchor="middle" font-size="0.010" fill="#333" font-weight="500">敘宴</text>
+                        <text x="121.430" y="31.305" text-anchor="middle" font-size="0.010" fill="#333" font-weight="500">武康大樓</text>
+                        <text x="121.487" y="31.210" text-anchor="middle" font-size="0.010" fill="#333" font-weight="500">豫園</text>
+                        
+                        <!-- 距離/時間標註 -->
+                        <text x="121.25" y="31.225" font-size="0.009" fill="#208084" font-weight="600">① 11:00 出發敘宴 (打車 20-25min)</text>
+                        <text x="121.25" y="31.240" font-size="0.009" fill="#208084" font-weight="600">② 15:00 法租界 (打車 20-30min)</text>
+                        <text x="121.25" y="31.255" font-size="0.009" fill="#208084" font-weight="600">③ 17:30 豫園 (打車 15-20min)</text>
+                        <text x="121.25" y="31.270" font-size="0.009" fill="#208084" font-weight="600">⓸ 18:00-21:00 豫園燈會</text>
+                    </svg>
+                    <div style="margin-top: 10px; font-size: 0.85em; color: var(--color-text-light);">
+                        <strong>🗺️ 路線說明：</strong>🏨 靜安寺 → (打車25min) → 🎭 敘宴宮廷午宴 → (打車25min) → 🏛️ 法租界(武康路/安福路) → (打車20min) → 🏮 豫園燈會<br>
+                        <strong>💡 提示：</strong>全天距離較遠，建議全程打車。敘宴預訂超級重要(務必提前30天)！
+                    </div>
+                </div>
+
+                <div class="day-intro">
+                    <strong>🎯 今日重點：</strong>敘宴沉浸式宮廷午宴、法租界深度遊、豫園燈會。<br>
+                    <strong>💡 提示：</strong>上午行程完全彈性，如果想多睡一小時，敘宴改12:00也可以。
+                </div>
+
+                <div class="timeline">
+                    <!-- Activity 1 -->
+                    <div class="timeline-item">
+                        <div class="time-badge">11:00</div>
+                        <div class="activity-title">🚕 前往敘宴</div>
+                        <div class="activity-details">
+                            <div class="detail-item">
+                                <span class="emoji">🚕</span>
+                                <div>
+                                    <div class="detail-label">推薦交通</div>
+                                    <div><strong>打車直達：</strong>靜安寺 → 敘宴(汶水路40號)</div>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <span class="emoji">⏱️</span>
+                                <div>
+                                    <div class="detail-label">耗時</div>
+                                    <div>約 20-25 分鐘</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Activity 2 -->
+                    <div class="timeline-item">
+                        <div class="time-badge">11:30</div>
+                        <div class="activity-title">🎭 敘宴：沉浸式宮廷午宴 (重點!)</div>
+                        <div class="activity-details">
+                            <img src="https://pplx-res.cloudinary.com/image/upload/v1764917429/search_images/dc7b66d8d236af5cdcda3384fd5a0362445c1792.jpg" alt="敘宴宮廷盛宴" class="activity-image">
+                            <div class="detail-item">
+                                <span class="emoji">🎭</span>
+                                <div>
+                                    <div class="detail-label">餐廳</div>
+                                    <div><strong>敘宴 (上海旗艦店)</strong> - 中國古代唐朝沉浸式宮廷盛宴</div>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <span class="emoji">👘</span>
+                                <div>
+                                    <div class="detail-label">特色</div>
+                                    <div>換漢服、欣賞表演、享用宮廷菜肴，穿越千年的文化體驗</div>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <span class="emoji">💰</span>
+                                <div>
+                                    <div class="detail-label">價格</div>
+                                    <div>午膳 ¥398/人 + 妝造 ¥188-288 + 10% 服務費</div>
+                                </div>
+                            </div>
+                            <div class="landmark-badge">⭐ 必打卡：古代宮廷場景，漢服穿搭，表演精彩</div>
+                        </div>
+                        <div class="tabs">
+                            <button class="tab-button active" onclick="switchTab(this, 'xuyan-booking')">預訂 (超重要!)</button>
+                            <button class="tab-button" onclick="switchTab(this, 'xuyan-menu')">菜色介紹</button>
+                            <button class="tab-button" onclick="switchTab(this, 'xuyan-tips')">用餐流程</button>
+                        </div>
+                        <div id="xuyan-booking" class="tab-content active">
+                            <strong>📞 預訂方式 (必做！)：</strong>
+                            <div class="option-item">
+                                <div class="option-title">⚠️ 最重要的事</div>
+                                <div class="option-detail"><strong>務必在出發前 30 天內預訂！</strong>敘宴超級熱門，晚訂很可能沒位子。</div>
+                            </div>
+                            <div class="option-item">
+                                <div class="option-title">方式 1：微信公眾號 (推薦)</div>
+                                <div class="option-detail">搜尋「敘宴」公眾號 → 選「上海旗艦店」→ 點「預訂」→ 選擇日期、時間、人數 → 支付訂金</div>
+                            </div>
+                            <div class="option-item">
+                                <div class="option-title">方式 2：Klook/Kkday</div>
+                                <div class="option-detail">旅遊平台預訂更便利，但價格會貴 20-30%</div>
+                            </div>
+                            <div class="option-item">
+                                <div class="option-title">取消政策</div>
+                                <div class="option-detail">用餐日期 <strong>48 小時內不可取消</strong></div>
+                            </div>
+                        </div>
+                        <div id="xuyan-menu" class="tab-content">
+                            <strong>🍲 推薦菜色：</strong>
+                            <div class="dish-recommendation">
+                                <div class="dish-name">🥣 金華火腿豆腐湯</div>
+                                <div>豆腐炭香撲鼻，湯頭濃郁，火腿鮮香，是推薦必喝第一道</div>
+                            </div>
+                            <div class="dish-recommendation">
+                                <div class="dish-name">🍖 宮廷烤乳鴿</div>
+                                <div>外皮酥脆，肉質嫩滑，皮脆肉嫩，古代皇帝最愛</div>
+                            </div>
+                            <div class="dish-recommendation">
+                                <div class="dish-name">🌽 宮廷小點</div>
+                                <div>精緻古法點心，樣式雅致，味道不錯</div>
+                            </div>
+                            <div class="dish-recommendation">
+                                <div class="dish-name">🥢 雙主食</div>
+                                <div>麵、飯、羹都有，完全吃不完，分量超足</div>
+                            </div>
+                        </div>
+                        <div id="xuyan-tips" class="tab-content">
+                            <strong>👘 用餐流程 (完整體驗)：</strong>
+                            <div class="option-item">
+                                <div class="option-title">Step 1：抵達 (11:30)</div>
+                                <div class="option-detail">出示預訂確認單與身份證件</div>
+                            </div>
+                            <div class="option-item">
+                                <div class="option-title">Step 2：選擇漢服 (11:40-12:00)</div>
+                                <div class="option-detail">工作人員帶你進換衣室，選擇喜歡的漢服款式</div>
+                            </div>
+                            <div class="option-item">
+                                <div class="option-title">Step 3：妝造 (若有預約, 12:00-12:20)</div>
+                                <div class="option-detail">化妝師為你化古風妝容、做髮型 (需另付費)</div>
+                            </div>
+                            <div class="option-item">
+                                <div class="option-title">Step 4：拍照 (12:20-12:50)</div>
+                                <div class="option-detail">在宮廷佈景區拍照 (古宮廷、亭台樓閣、花園)</div>
+                            </div>
+                            <div class="option-item">
+                                <div class="option-title">Step 5：開席享宴 (13:00)</div>
+                                <div class="option-detail">坐上宮廷宴席，享受美食與樂舞表演</div>
+                            </div>
+                        </div>
+                        <div class="note-box">
+                            <strong>💡 成功訂位的關鍵：</strong>出發前 1 週，再檢查一次微信預訂是否確認。敘宴常因滿位而取消訂位，提前確認保險。
+                        </div>
+                    </div>
+
+                    <!-- Activity 3 -->
+                    <div class="timeline-item">
+                        <div class="time-badge">15:00</div>
+                        <div class="activity-title">🚕 前往法租界</div>
+                        <div class="activity-details">
+                            <div class="detail-item">
+                                <span class="emoji">🚕</span>
+                                <div>
+                                    <div class="detail-label">推薦交通</div>
+                                    <div><strong>打車直達</strong>：敘宴 → 武康大樓</div>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <span class="emoji">⏱️</span>
+                                <div>
+                                    <div class="detail-label">耗時</div>
+                                    <div>約 20-30 分鐘</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Activity 4 -->
+                    <div class="timeline-item">
+                        <div class="time-badge">15:30</div>
+                        <div class="activity-title">🏛️ 法租界漫步 (武康路 & 安福路)</div>
+                        <div class="activity-details">
+                            <img src="https://pplx-res.cloudinary.com/image/upload/v1764917431/search_images/08c34d5d158d920d2ab917e70213ece9765ed730.jpg" alt="武康路法租界" class="activity-image">
+                            <div class="detail-item">
+                                <span class="emoji">📸</span>
+                                <div>
+                                    <div class="detail-label">武康大樓</div>
+                                    <div>淮海中路與武康路交口，法租界地標，紅磚造型超上鏡</div>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <span class="emoji">☕</span>
+                                <div>
+                                    <div class="detail-label">推薦咖啡廳</div>
+                                    <div><strong>老麥咖啡館</strong> (武康大樓底層) / <strong>RAC Bar</strong> (安福路)</div>
+                                </div>
+                            </div>
+                            <div class="landmark-badge">⭐ 必打卡：武康大樓紅磚 + 石庫門老洋房</div>
+                        </div>
+                        <div class="tabs">
+                            <button class="tab-button active" onclick="switchTab(this, 'f租界-shops')">必逛店鋪</button>
+                            <button class="tab-button" onclick="switchTab(this, 'frentier-cafe')">咖啡廳推薦</button>
+                        </div>
+                        <div id="frentier-shops" class="tab-content active">
+                            <strong>🛍️ 必逛景點：</strong>
+                            <div class="option-item">
+                                <div class="option-title">多抓魚循環商店</div>
+                                <div class="option-detail">工業風的二手書店/服飾店，文青必逛，有上海特色紀念品</div>
+                            </div>
+                            <div class="option-item">
+                                <div class="option-title">話梅 HARMAY</div>
+                                <div class="option-detail">倉儲式美妝店，品牌超齊全，面膜、精油價格友善</div>
+                            </div>
+                            <div class="option-item">
+                                <div class="option-title">13DE MARZO</div>
+                                <div class="option-detail">超可愛小熊主題服飾 + 咖啡店，打卡必去</div>
+                            </div>
+                        </div>
+                        <div id="frentier-cafe" class="tab-content">
+                            <strong>☕ 咖啡廳推薦：</strong>
+                            <div class="restaurant-card">
+                                <div class="restaurant-name">☕ 老麥咖啡館</div>
+                                <div class="restaurant-info">
+                                    <strong>位置：</strong>武康大樓底層<br>
+                                    <strong>特色菜色：</strong><br>
+                                    • 經典拿鐵 - 奶香濃厚 ¥28<br>
+                                    • 手作甜點 - 黑森林蛋糕、馬卡龍<br>
+                                    <strong>人均：</strong>¥50-80
+                                </div>
+                            </div>
+                            <div class="restaurant-card">
+                                <div class="restaurant-name">☕ RAC Bar</div>
+                                <div class="restaurant-info">
+                                    <strong>位置：</strong>安福路<br>
+                                    <strong>特色菜色：</strong><br>
+                                    • 法式可麗餅 - 甜鹹都有，¥35-50<br>
+                                    • 手作甜點 - 馬卡龍、水果塔<br>
+                                    <strong>人均：</strong>¥60-100
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Activity 5 -->
+                    <div class="timeline-item">
+                        <div class="time-badge">17:30</div>
+                        <div class="activity-title">🚕 前往豫園</div>
+                        <div class="activity-details">
+                            <div class="detail-item">
+                                <span class="emoji">🚕</span>
+                                <div>
+                                    <div class="detail-label">推薦方式</div>
+                                    <div><strong>計程車最省力</strong>：法租界 → 豫園</div>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <span class="emoji">⏱️</span>
+                                <div>
+                                    <div class="detail-label">耗時</div>
+                                    <div>約 15-20 分鐘</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Activity 6 -->
+                    <div class="timeline-item">
+                        <div class="time-badge">18:00</div>
+                        <div class="activity-title">🏮 豫園燈會 + 晚餐</div>
+                        <div class="activity-details">
+                            <img src="https://pplx-res.cloudinary.com/image/upload/v1764917429/search_images/e0860cc3993d5385eb34b66ffc95251ab6e7e7cd.jpg" alt="豫園燈會" class="activity-image">
+                            <div class="detail-item">
+                                <span class="emoji">🏮</span>
+                                <div>
+                                    <div class="detail-label">景點</div>
+                                    <div><strong>豫園商城</strong> & <strong>城隍廟</strong></div>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <span class="emoji">✨</span>
+                                <div>
+                                    <div class="detail-label">特色</div>
+                                    <div>元旦期間大型花燈展，傳統建築燈火輝煌，必打卡景點</div>
+                                </div>
+                            </div>
+                            <div class="landmark-badge">⭐ 必打卡：九曲橋 + 湖心亭 + 主題花燈</div>
+                        </div>
+                        <div class="tabs">
+                            <button class="tab-button active" onclick="switchTab(this, 'lantern-tips')">遊覽建議</button>
+                            <button class="tab-button" onclick="switchTab(this, 'lantern-dinner')">晚餐推薦</button>
+                        </div>
+                        <div id="lantern-tips" class="tab-content active">
+                            <strong>🏮 豫園燈會遊覽貼士：</strong>
+                            <div class="option-item">
+                                <div class="option-title">最佳時間</div>
+                                <div class="option-detail"><strong>18:00-21:00</strong> 是黃金時間，天色漸暗，燈光全開，氛圍最佳</div>
+                            </div>
+                            <div class="option-item">
+                                <div class="option-title">必拍景點</div>
+                                <div class="option-detail">九曲橋 (經典木橋) → 湖心亭 (中央亭閣) → 主題花燈裝置</div>
+                            </div>
+                            <div class="option-item">
+                                <div class="option-title">人潮提示</div>
+                                <div class="option-detail">元旦假期人潮眾多，注意保管財物，避免擁擠時段 (18:00-19:30)</div>
+                            </div>
+                        </div>
+                        <div id="lantern-dinner" class="tab-content">
+                            <strong>🍜 豫園晚餐推薦：</strong>
+                            <div class="restaurant-card">
+                                <div class="restaurant-name">🥟 南翔饅頭店</div>
+                                <div class="restaurant-info">
+                                    <strong>招牌菜色：</strong><br>
+                                    • 蟹粉小籠包 - 皮薄汁多，蟹粉鮮香 ¥12/4個<br>
+                                    • 豬肉小籠 - 肉質鮮嫩 ¥10/4個<br>
+                                    <strong>人均：</strong>¥30-60<br>
+                                    <strong>注意：</strong>可能需排隊 30-60 分鐘
+                                </div>
+                            </div>
+                            <div class="restaurant-card">
+                                <div class="restaurant-name">🍜 寧波湯糰店</div>
+                                <div class="restaurant-info">
+                                    <strong>特色菜色：</strong><br>
+                                    • 黑芝麻湯糰 - 甜蜜香滑 ¥8/碗<br>
+                                    • 鮮肉湯糰 - 新年必吃<br>
+                                    <strong>人均：</strong>¥20-40
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="summary-box">
+                    <div class="summary-title">📌 第三天行程總結</div>
+                    <strong>預算估算：</strong>計程車 ¥50 + 敘宴午餐 ¥500-700/人 + 妝造 ¥0-300 + 晚餐 ¥50 = 約 ¥600-1150/人<br>
+                    <strong>體力指數：</strong>⭐⭐⭐☆☆ (彈性強，可根據體力調整)<br>
+                    <strong>拍照指數：</strong>⭐⭐⭐⭐⭐ (法租界 + 敘宴 + 豫園一整天都在拍照)
+                </div>
+            </div>
+        </div>
+
+        <!-- DAY 4 -->
+        <div class="day-section">
+            <div class="day-header" onclick="toggleDay(this)">
+                <div>
+                    <h2>📅 第四天：01/03 (週六) 奢華 LV & 購物美食</h2>
+                    <p style="margin: 5px 0 0 0; font-size: 0.9em;">前灘太古里、南京東路購物、晚餐自由選擇</p>
+                </div>
+                <div class="date-badge">5 項活動</div>
+            </div>
+            <div class="day-content">
+                <div class="day-map">
+                    <div style="margin-bottom: 15px; font-weight: 600; color: #208084;">🗺️ 今日路線地圖 (LV路易號&購物 - 俯視圖)</div>
+                    <svg width="100%" height="350" viewBox="121.2 31.18 0.38 0.12" style="background: linear-gradient(135deg, #f0f9ff 0%, #f5f9ff 100%); border-radius: 8px;" preserveAspectRatio="xMidYMid meet">
+                        <defs>
+                            <pattern id="grid-day4" width="0.05" height="0.05" patternUnits="userSpaceOnUse">
+                                <path d="M 0.05 0 L 0 0 0 0.05" fill="none" stroke="#e8e8e8" stroke-width="0.003"/>
+                            </pattern>
+                            <marker id="arrowhead-day4" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="#208084"/>
+                            </marker>
+                        </defs>
+                        <rect x="121.2" y="31.18" width="0.38" height="0.12" fill="url(#grid-day4)"/>
+                        
+                        <!-- 地鐵2號線 -->
+                        <line x1="121.264" y1="31.271" x2="121.264" y2="31.24" stroke="#ef4444" stroke-width="0.007" opacity="0.5"/>
+                        <line x1="121.264" y1="31.24" x2="121.487" y2="31.256" stroke="#ef4444" stroke-width="0.007" opacity="0.5"/>
+                        
+                        <!-- 主路線 -->
+                        <polyline points="121.273,31.275 121.509,31.206 121.487,31.256" 
+                                  stroke="#208084" stroke-width="0.006" fill="none" stroke-dasharray="0.008,0.008" marker-end="url(#arrowhead-day4)"/>
+                        
+                        <!-- 景點標記 -->
+                        <!-- 靜安寺/飯店 -->
+                        <circle cx="121.273" cy="31.275" r="0.009" fill="#4caf50" opacity="0.25"/>
+                        <circle cx="121.273" cy="31.275" r="0.006" fill="#4caf50"/>
+                        <text x="121.273" y="31.277" text-anchor="middle" font-size="0.015">🏨</text>
+                        
+                        <!-- LV路易號(前灘太古里) -->
+                        <circle cx="121.509" cy="31.206" r="0.009" fill="#ff9800" opacity="0.25"/>
+                        <circle cx="121.509" cy="31.206" r="0.006" fill="#ff9800"/>
+                        <text x="121.509" y="31.208" text-anchor="middle" font-size="0.015">🚢</text>
+                        
+                        <!-- 南京東路 -->
+                        <circle cx="121.487" cy="31.256" r="0.009" fill="#9c27b0" opacity="0.25"/>
+                        <circle cx="121.487" cy="31.256" r="0.006" fill="#9c27b0"/>
+                        <text x="121.487" y="31.258" text-anchor="middle" font-size="0.015">🛍️</text>
+                        
+                        <!-- 周邊地標 -->
+                        <circle cx="121.440" cy="31.280" r="0.006" fill="#ffc107" opacity="0.12"/>
+                        <text x="121.440" y="31.282" text-anchor="middle" font-size="0.010" fill="#666" opacity="0.5">豫園</text>
+                        
+                        <!-- 標籤 -->
+                        <text x="121.273" y="31.300" text-anchor="middle" font-size="0.011" fill="#333" font-weight="500">靜安寺</text>
+                        <text x="121.530" y="31.200" text-anchor="middle" font-size="0.011" fill="#333" font-weight="500">LV路易號</text>
+                        <text x="121.487" y="31.275" text-anchor="middle" font-size="0.011" fill="#333" font-weight="500">南京東路</text>
+                        
+                        <!-- 距離/時間標註 -->
+                        <text x="121.25" y="31.225" font-size="0.009" fill="#208084" font-weight="600">① 10:30 靜安寺出發</text>
+                        <text x="121.25" y="31.240" font-size="0.009" fill="#208084" font-weight="600">② 11:00 LV路易號 (打車20min)</text>
+                        <text x="121.25" y="31.255" font-size="0.009" fill="#208084" font-weight="600">③ 14:30 南京東路 (地鐵15min)</text>
+                        <text x="121.25" y="31.270" font-size="0.009" fill="#208084" font-weight="600">⓸ 18:00 晚餐 (自由選擇)</text>
+                    </svg>
+                    <div style="margin-top: 10px; font-size: 0.85em; color: var(--color-text-light);">
+                        <strong>🗺️ 路線說明：</strong>🏨 靜安寺 → (打車20min) → 🚢 LV路易號&太古里 → (地鐵2號線 15min) → 🛍️ 南京東路步行街<br>
+                        <strong>💡 提示：</strong>購物天堂日！LV郵輪建築是打卡聖地。南京東路可逛泡泡瑪特、樂高、和平飯店。
+                    </div>
+                </div>
+
+                <div class="day-intro">
+                    <strong>🎯 今日重點：</strong>前灘太古里 LV、南京東路購物、美食探索。<br>
+                    <strong>💡 提示：</strong>今晚時間完全自由，可隨意安排美食或按摩放鬆。
+                </div>
+
+                <div class="timeline">
+                    <!-- Activity 1 -->
+                    <div class="timeline-item">
+                        <div class="time-badge">10:30</div>
+                        <div class="activity-title">🚕 前往前灘太古里</div>
+                        <div class="activity-details">
+                            <div class="detail-item">
+                                <span class="emoji">🚕</span>
+                                <div>
+                                    <div class="detail-label">交通</div>
+                                    <div>打車前往 <strong>前灘太古里</strong></div>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <span class="emoji">📍</span>
+                                <div>
+                                    <div class="detail-label">地址</div>
+                                    <div>浦東新區東育路500號</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Activity 2 -->
+                    <div class="timeline-item">
+                        <div class="time-badge">11:00</div>
+                        <div class="activity-title">💼 LV 路易號 (Le Café Louis Vuitton)</div>
+                        <div class="activity-details">
+                            <img src="https://pplx-res.cloudinary.com/image/upload/v1764783722/search_images/72be0550cac1b3c077bb06d39baf57b0b2084393.jpg" alt="LV路易號" class="activity-image">
+                            <div class="detail-item">
+                                <span class="emoji">🚢</span>
+                                <div>
+                                    <div class="detail-label">特色</div>
+                                    <div><strong>郵輪造型建築</strong>，超級獨特，必拍！</div>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <span class="emoji">☕</span>
+                                <div>
+                                    <div class="detail-label">內部設施</div>
+                                    <div>咖啡廳、餐廳、LV 精品店、沉浸式展覽</div>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <span class="emoji">💰</span>
+                                <div>
+                                    <div class="detail-label">消費</div>
+                                    <div>無強制消費；咖啡 ¥50-80，可只拍照</div>
+                                </div>
+                            </div>
+                            <div class="landmark-badge">⭐ 必打卡：郵輪造型外觀 + 玻璃穹頂內部</div>
+                        </div>
+                        <div class="tabs">
+                            <button class="tab-button active" onclick="switchTab(this, 'lv-tips')">參觀建議</button>
+                            <button class="tab-button" onclick="switchTab(this, 'lv-cafe')">咖啡廳菜單</button>
+                        </div>
+                        <div id="lv-tips" class="tab-content active">
+                            <strong>🏛️ LV 路易號參觀貼士：</strong>
+                            <div class="option-item">
+                                <div class="option-title">開放時間</div>
+                                <div class="option-detail">通常 10:00-22:00</div>
+                            </div>
+                            <div class="option-item">
+                                <div class="option-title">入場</div>
+                                <div class="option-detail">進入建築內無需付費，只有用餐或購物才消費</div>
+                            </div>
+                            <div class="option-item">
+                                <div class="option-title">必拍景點</div>
+                                <div class="option-detail">建築外觀 + 室內大廳 + 戶外露台(可看黃浦江)</div>
+                            </div>
+                        </div>
+                        <div id="lv-cafe" class="tab-content">
+                            <strong>☕ Le Café Louis Vuitton 推薦菜色：</strong>
+                            <div class="dish-recommendation">
+                                <div class="dish-name">☕ 經典卡布奇諾</div>
+                                <div>奶泡細膩，咖啡香氣十足 ¥58</div>
+                            </div>
+                            <div class="dish-recommendation">
+                                <div class="dish-name">🍰 LV 限定甜點</div>
+                                <div>精緻法式甜點，可帶回家做伴手禮 ¥80-120</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Activity 3 -->
+                    <div class="timeline-item">
+                        <div class="time-badge">13:00</div>
+                        <div class="activity-title">🍽️ 午餐 (太古里商場內)</div>
+                        <div class="activity-details">
+                            <div class="detail-item">
+                                <span class="emoji">🍽️</span>
+                                <div>
+                                    <div class="detail-label">選擇眾多</div>
+                                    <div>太古里有日、法、義式等多國餐廳</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tabs">
+                            <button class="tab-button active" onclick="switchTab(this, 'taiguli-lunch')">午餐推薦</button>
+                        </div>
+                        <div id="taiguli-lunch" class="tab-content active">
+                            <strong>🍽️ 前灘太古里午餐推薦：</strong>
+                            <div class="restaurant-card">
+                                <div class="restaurant-name">🍣 日式精選</div>
+                                <div class="restaurant-info">
+                                    <strong>推薦菜色：</strong><br>
+                                    • 海膽丼 - 新鮮海膽，香郁濃厚 ¥88<br>
+                                    • 松葉蟹腳 - 鮮甜多汁 ¥118<br>
+                                    <strong>人均：</strong>¥100-200
+                                </div>
+                            </div>
+                            <div class="restaurant-card">
+                                <div class="restaurant-name">🥗 輕食沙拉</div>
+                                <div class="restaurant-info">
+                                    <strong>推薦菜色：</strong><br>
+                                    • 新鮮蔬菜沙拉 - 爽脆清爽 ¥50<br>
+                                    • 三文魚沙拉 - 營養健康 ¥68<br>
+                                    <strong>人均：</strong>¥50-100
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Activity 4 -->
+                    <div class="timeline-item">
+                        <div class="time-badge">14:30</div>
+                        <div class="activity-title">🛍️ 南京東路步行街購物</div>
+                        <div class="activity-details">
+                            <img src="https://pplx-res.cloudinary.com/image/upload/v1764783722/search_images/a1d589e5763a84557289d6781e8e9d639895745b.jpg" alt="南京東路步行街" class="activity-image">
+                            <div class="detail-item">
+                                <span class="emoji">🚇</span>
+                                <div>
+                                    <div class="detail-label">交通</div>
+                                    <div>地鐵至「南京東路站」或「人民廣場站」</div>
+                                </div>
+                            </div>
+                            <div class="landmark-badge">⭐ 必打卡：和平飯店 + 泡泡瑪特旗艦店 + 樂高旗艦店</div>
+                        </div>
+                        <div class="tabs">
+                            <button class="tab-button active" onclick="switchTab(this, 'nanjing-shops')">必逛景點</button>
+                        </div>
+                        <div id="nanjing-shops" class="tab-content active">
+                            <strong>🛍️ 南京東路必逛：</strong>
+                            <div class="option-item">
+                                <div class="option-title">和平飯店 (Peace Hotel)</div>
+                                <div class="option-detail">百年老建築，歷史感十足，內有餐廳、咖啡廳、精品店</div>
+                            </div>
+                            <div class="option-item">
+                                <div class="option-title">泡泡瑪特旗艦店</div>
+                                <div class="option-detail">潮玩聖地，盲盒、公仔應有盡有，粉絲必朝聖</div>
+                            </div>
+                            <div class="option-item">
+                                <div class="option-title">樂高旗艦店</div>
+                                <div class="option-detail">全球最大樂高旗艦店之一，互動體驗區，適合所有年齡</div>
+                            </div>
+                            <div class="option-item">
+                                <div class="option-title">M&M's 世界</div>
+                                <div class="option-detail">糖果天堂，繽紛色彩，拍照一級棒</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Activity 5 -->
+                    <div class="timeline-item">
+                        <div class="time-badge">18:00</div>
+                        <div class="activity-title">🍽️ 晚餐 (完全彈性！)</div>
+                        <div class="activity-details">
+                            <div class="detail-item">
+                                <span class="emoji">📍</span>
+                                <div>
+                                    <div class="detail-label">地點</div>
+                                    <div>人民廣場 / 南京西路 / 靜安寺周邊</div>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <span class="emoji">💡</span>
+                                <div>
+                                    <div class="detail-label">說明</div>
+                                    <div>前兩天吃了大餐，今晚建議隨意輕鬆吃，或享受按摩放鬆</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tabs">
+                            <button class="tab-button active" onclick="switchTab(this, 'dinner-d4')">晚餐推薦</button>
+                            <button class="tab-button" onclick="switchTab(this, 'relax')">放鬆替代方案</button>
+                        </div>
+                        <div id="dinner-d4" class="tab-content active">
+                            <strong>🍜 晚餐備選 (人民廣場/南京西路/靜安寺周邊)：</strong>
+                            <div class="restaurant-card">
+                                <div class="restaurant-name">🦀 蟹叄寳 / 蟹家大院</div>
+                                <div class="restaurant-info">
+                                    <strong>推薦菜色：</strong><br>
+                                    • 蟹黃麵 - 湯濃郁，蟹香撲鼻 ¥68<br>
+                                    • 蟹黃炒飯 - 飽滿蟹黃混入飯粒 ¥58<br>
+                                    <strong>人均：</strong>¥50-100
+                                </div>
+                            </div>
+                            <div class="restaurant-card">
+                                <div class="restaurant-name">🥟 佳家湯包 & 小楊生煎</div>
+                                <div class="restaurant-info">
+                                    <strong>推薦菜色：</strong><br>
+                                    • 佳家湯包 - 皮薄汁多 ¥8/4個<br>
+                                    • 小楊生煎 - 底脆肉香 ¥6/4個<br>
+                                    <strong>人均：</strong>¥30-60
+                                </div>
+                            </div>
+                            <div class="restaurant-card">
+                                <div class="restaurant-name">🍲 圓苑</div>
+                                <div class="restaurant-info">
+                                    <strong>推薦菜色：</strong><br>
+                                    • 紅燒肉 - 肥嫩多汁 ¥45<br>
+                                    • 鴨血粉絲湯 - 鮮香清爽 ¥25<br>
+                                    <strong>人均：</strong>¥60-120
+                                </div>
+                            </div>
+                        </div>
+                        <div id="relax" class="tab-content">
+                            <strong>💆 若不想出門，居家放鬆方案：</strong>
+                            <div class="option-item">
+                                <div class="option-title">飯店內用餐</div>
+                                <div class="option-detail">靜安崑崙有多家餐廳，直接在房間或大廳用餐，省事省力</div>
+                            </div>
+                            <div class="option-item">
+                                <div class="option-title">按摩舒壓</div>
+                                <div class="option-detail">找間按摩店按足部按摩 + 全身舒壓 (約 ¥80-150/1.5-2 小時)</div>
+                            </div>
+                            <div class="option-item">
+                                <div class="option-title">飯店設施</div>
+                                <div class="option-detail">使用泳池、三溫暖、健身房，好好放鬆</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="summary-box">
+                    <div class="summary-title">📌 第四天行程總結</div>
+                    <strong>預算估算：</strong>計程車 ¥50 + LV 咖啡 ¥0-100 + 午餐 ¥80-150 + 晚餐 ¥50-150 = 約 ¥180-450<br>
+                    <strong>體力指數：</strong>⭐⭐⭐☆☆ (主要是逛街購物，較輕鬆)<br>
+                    <strong>購物指數：</strong>⭐⭐⭐⭐⭐ (購物天堂日)<br>
+                    <strong>拍照指數：</strong>⭐⭐⭐⭐ (LV郵輪建築超讚)
+                </div>
+            </div>
+        </div>
+
+        <!-- DAY 5 -->
+        <div class="day-section">
+            <div class="day-header" onclick="toggleDay(this)">
+                <div>
+                    <h2>📅 第五天：01/04 (週日) 文創巡禮 & 溫暖返程</h2>
+                    <p style="margin: 5px 0 0 0; font-size: 0.9em;">最後採買、品嚐美食、高空道別</p>
+                </div>
+                <div class="date-badge">5 項活動</div>
+            </div>
+            <div class="day-content">
+                <div class="day-map">
+                    <div style="margin-bottom: 15px; font-weight: 600; color: #208084;">🗺️ 今日路線地圖 (文創&返程 - 俯視圖)</div>
+                    <svg width="100%" height="350" viewBox="121.2 31.12 0.65 0.18" style="background: linear-gradient(135deg, #f0f9ff 0%, #f5f9ff 100%); border-radius: 8px;" preserveAspectRatio="xMidYMid meet">
+                        <defs>
+                            <pattern id="grid-day5" width="0.05" height="0.05" patternUnits="userSpaceOnUse">
+                                <path d="M 0.05 0 L 0 0 0 0.05" fill="none" stroke="#e8e8e8" stroke-width="0.003"/>
+                            </pattern>
+                            <marker id="arrowhead-day5" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="#208084"/>
+                            </marker>
+                        </defs>
+                        <rect x="121.2" y="31.12" width="0.65" height="0.18" fill="url(#grid-day5)"/>
+                        
+                        <!-- 地鐵2號線 -->
+                        <line x1="121.264" y1="31.271" x2="121.264" y2="31.24" stroke="#ef4444" stroke-width="0.008" opacity="0.5"/>
+                        <line x1="121.264" y1="31.24" x2="121.805" y2="31.143" stroke="#ef4444" stroke-width="0.008" opacity="0.5"/>
+                        <text x="121.450" y="31.200" font-size="0.014" fill="#ef4444" font-weight="bold">2號線(返回)</text>
+                        
+                        <!-- 主路線 -->
+                        <polyline points="121.273,31.275 121.471,31.274 121.436,31.284 121.264,31.271 121.805,31.143" 
+                                  stroke="#208084" stroke-width="0.006" fill="none" stroke-dasharray="0.008,0.008" marker-end="url(#arrowhead-day5)"/>
+                        
+                        <!-- 景點標記 -->
+                        <!-- 靜安寺/飯店 -->
+                        <circle cx="121.273" cy="31.275" r="0.010" fill="#4caf50" opacity="0.25"/>
+                        <circle cx="121.273" cy="31.275" r="0.007" fill="#4caf50"/>
+                        <text x="121.273" y="31.277" text-anchor="middle" font-size="0.016">🏨</text>
+                        
+                        <!-- 田子坊 -->
+                        <circle cx="121.471" cy="31.274" r="0.010" fill="#ff6b6b" opacity="0.25"/>
+                        <circle cx="121.471" cy="31.274" r="0.007" fill="#ff6b6b"/>
+                        <text x="121.471" y="31.276" text-anchor="middle" font-size="0.016">🎨</text>
+                        
+                        <!-- 新天地 -->
+                        <circle cx="121.436" cy="31.284" r="0.010" fill="#ffc107" opacity="0.25"/>
+                        <circle cx="121.436" cy="31.284" r="0.007" fill="#ffc107"/>
+                        <text x="121.436" y="31.286" text-anchor="middle" font-size="0.016">🖼️</text>
+                        
+                        <!-- 靜安寺站(返程) -->
+                        <circle cx="121.264" cy="31.271" r="0.010" fill="#2196f3" opacity="0.25"/>
+                        <circle cx="121.264" cy="31.271" r="0.007" fill="#2196f3"/>
+                        <text x="121.264" y="31.273" text-anchor="middle" font-size="0.016">🚇</text>
+                        
+                        <!-- 浦東機場 -->
+                        <circle cx="121.805" cy="31.143" r="0.010" fill="#ff6b6b" opacity="0.25"/>
+                        <circle cx="121.805" cy="31.143" r="0.007" fill="#ff6b6b"/>
+                        <text x="121.805" y="31.145" text-anchor="middle" font-size="0.016">✈️</text>
+                        
+                        <!-- 周邊地標 -->
+                        <circle cx="121.487" cy="31.229" r="0.006" fill="#ff9800" opacity="0.12"/>
+                        <text x="121.487" y="31.231" text-anchor="middle" font-size="0.010" fill="#666" opacity="0.5">豫園</text>
+                        
+                        <!-- 標籤 -->
+                        <text x="121.273" y="31.300" text-anchor="middle" font-size="0.012" fill="#333" font-weight="500">靜安寺(退房)</text>
+                        <text x="121.471" y="31.255" text-anchor="middle" font-size="0.011" fill="#333" font-weight="500">田子坊</text>
+                        <text x="121.436" y="31.305" text-anchor="middle" font-size="0.011" fill="#333" font-weight="500">新天地</text>
+                        <text x="121.805" y="31.125" text-anchor="middle" font-size="0.012" fill="#333" font-weight="500">浦東機場</text>
+                        
+                        <!-- 距離/時間標註 -->
+                        <text x="121.25" y="31.195" font-size="0.010" fill="#208084" font-weight="600">① 10:00 退房&寄行李</text>
+                        <text x="121.25" y="31.210" font-size="0.010" fill="#208084" font-weight="600">② 10:30 文創巡禮(二選一 1-2hr)</text>
+                        <text x="121.25" y="31.225" font-size="0.010" fill="#208084" font-weight="600">③ 13:00 最後午餐</text>
+                        <text x="121.25" y="31.240" font-size="0.010" fill="#208084" font-weight="600">④ 15:30 領取行李</text>
+                        <text x="121.25" y="31.255" font-size="0.010" fill="#208084" font-weight="600">⓸ 16:00 前往機場 (地鐵90min)</text>
+                        <text x="121.25" y="31.270" font-size="0.010" fill="#208084" font-weight="600">⑥ 20:10 BR0721 返台</text>
+                    </svg>
+                    <div style="margin-top: 10px; font-size: 0.85em; color: var(--color-text-light);">
+                        <strong>🗺️ 路線說明：</strong>🏨 靜安寺(退房) → 🎨 田子坊 或 🖼️ 新天地(選一) → 🚇 靜安寺站 → (地鐵2號線90分鐘) → ✈️ 浦東機場<br>
+                        <strong>💡 提示：</strong>最後輕鬆的一天！記得領行李、清點伴手禮。務必16:00準時上地鐵。美好回憶，再見上海！
+                    </div>
+                </div>
+
+                <div class="day-intro">
+                    <strong>🎯 今日重點：</strong>最後採買、品嚐上海美食、上飛機前的完美道別。<br>
+                    <strong>💡 提示：</strong>非常輕鬆的一天，主要是準備與返程。
+                </div>
+
+                <div class="timeline">
+                    <!-- Activity 1 -->
+                    <div class="timeline-item">
+                        <div class="time-badge">10:00</div>
+                        <div class="activity-title">🏨 退房與寄行李</div>
+                        <div class="activity-details">
+                            <div class="detail-item">
+                                <span class="emoji">🧳</span>
+                                <div>
+                                    <div class="detail-label">辦理退房</div>
+                                    <div>通常 Check-out 時間為 11:00 或 12:00</div>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <span class="emoji">📦</span>
+                                <div>
+                                    <div class="detail-label">寄放行李</div>
+                                    <div>將行李寄放在飯店櫃台，費用通常免費</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Activity 2 -->
+                    <div class="timeline-item">
+                        <div class="time-badge">10:30</div>
+                        <div class="activity-title">🎨 最後巡禮 (二選一)</div>
+                        <div class="activity-details">
+                            <div class="detail-item">
+                                <span class="emoji">🎨</span>
+                                <div>
+                                    <div class="detail-label">完全彈性</div>
+                                    <div>根據時間與興趣選擇上午行程</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tabs">
+                            <button class="tab-button active" onclick="switchTab(this, 'option-a')">方案 A: 田子坊</button>
+                            <button class="tab-button" onclick="switchTab(this, 'option-b')">方案 B: 新天地</button>
+                        </div>
+                        <div id="option-a" class="tab-content active">
+                            <strong>🎨 田子坊 (文藝路線)：</strong>
+                            <div class="option-item">
+                                <div class="option-title">地點</div>
+                                <div class="option-detail">泰康路 (黃浦區)</div>
+                            </div>
+                            <div class="option-item">
+                                <div class="option-title">特色</div>
+                                <div class="option-detail">由石庫門建築群改建，老洋房改成文創小店、咖啡館、藝廊、酒吧</div>
+                            </div>
+                            <div class="option-item">
+                                <div class="option-title">推薦理由</div>
+                                <div class="option-detail">最能體驗上海老弄堂文化，買紀念品的最佳去處</div>
+                            </div>
+                            <div class="option-item">
+                                <div class="option-title">時間</div>
+                                <div class="option-detail">1-2 小時</div>
+                            </div>
+                        </div>
+                        <div id="option-b" class="tab-content">
+                            <strong>🖼️ 新天地 (高端路線)：</strong>
+                            <div class="option-item">
+                                <div class="option-title">地點</div>
+                                <div class="option-detail">黃浦區淮海中路</div>
+                            </div>
+                            <div class="option-item">
+                                <div class="option-title">特色</div>
+                                <div class="option-detail">精心修復的石庫門，空間更開闊、品牌更高端</div>
+                            </div>
+                            <div class="option-item">
+                                <div class="option-title">亮點</div>
+                                <div class="option-detail">中共一大會址紀念館、當代藝術展覽、高檔餐廳</div>
+                            </div>
+                            <div class="option-item">
+                                <div class="option-title">推薦理由</div>
+                                <div class="option-detail">比田子坊更精緻高級，適合想看當代藝術的人</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Activity 3 -->
+                    <div class="timeline-item">
+                        <div class="time-badge">13:00</div>
+                        <div class="activity-title">🍽️ 最後午餐 (彈性推薦)</div>
+                        <div class="activity-details">
+                            <div class="detail-item">
+                                <span class="emoji">🍽️</span>
+                                <div>
+                                    <div class="detail-label">主題</div>
+                                    <div>上海經典小吃或精選餐廳</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tabs">
+                            <button class="tab-button active" onclick="switchTab(this, 'final-lunch')">午餐推薦</button>
+                        </div>
+                        <div id="final-lunch" class="tab-content active">
+                            <strong>🍜 最後午餐備選：</strong>
+                            <div class="restaurant-card">
+                                <div class="restaurant-name">🥟 富春小籠</div>
+                                <div class="restaurant-info">
+                                    <strong>推薦菜色：</strong><br>
+                                    • 蟹粉小籠包 - 皮薄汁多 ¥12/4個<br>
+                                    • 豬肉小籠 - 肉質鮮嫩 ¥10/4個<br>
+                                    <strong>人均：</strong>¥30-60
+                                </div>
+                            </div>
+                            <div class="restaurant-card">
+                                <div class="restaurant-name">🍜 阿娘麵</div>
+                                <div class="restaurant-info">
+                                    <strong>推薦菜色：</strong><br>
+                                    • 黃魚麵 - 湯頭濃郁，招牌必吃 ¥28<br>
+                                    • 蝦仁麵 - 鮮甜多汁 ¥25<br>
+                                    <strong>人均：</strong>¥30-50
+                                </div>
+                            </div>
+                            <div class="restaurant-card">
+                                <div class="restaurant-name">☕ 靜安嘉里中心美食城</div>
+                                <div class="restaurant-info">
+                                    <strong>特色：</strong>選擇極多，環境舒適<br>
+                                    <strong>推薦：</strong>各式日、韓、泰、中菜應有盡有<br>
+                                    <strong>人均：</strong>¥60-150
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Activity 4 -->
+                    <div class="timeline-item">
+                        <div class="time-badge">15:30</div>
+                        <div class="activity-title">🏨 領取行李</div>
+                        <div class="activity-details">
+                            <div class="detail-item">
+                                <span class="emoji">🧳</span>
+                                <div>
+                                    <div class="detail-label">任務</div>
+                                    <div>回飯店領取之前寄放的行李</div>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <span class="emoji">📦</span>
+                                <div>
+                                    <div class="detail-label">檢查</div>
+                                    <div>清點行李，確認所有伴手禮都在</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Activity 5 -->
+                    <div class="timeline-item">
+                        <div class="time-badge">16:00</div>
+                        <div class="activity-title">✈️ 前往機場</div>
+                        <div class="activity-details">
+                            <div class="detail-item">
+                                <span class="emoji">🚇</span>
+                                <div>
+                                    <div class="detail-label">推薦交通</div>
+                                    <div><strong>地鐵2號線</strong>直達浦東機場</div>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <span class="emoji">⏱️</span>
+                                <div>
+                                    <div class="detail-label">耗時</div>
+                                    <div>約 90 分鐘 (16:00 出發 → 17:30 抵達)</div>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <span class="emoji">⚠️</span>
+                                <div>
+                                    <div class="detail-label">重要提醒</div>
+                                    <div><strong>務必 16:00 準時上車</strong>，預留時間辦理登機</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="summary-box">
+                    <div class="summary-title">📌 第五天行程總結</div>
+                    <strong>預算估算：</strong>地鐵 ¥7 + 午餐 ¥50-150 = 約 ¥57-157<br>
+                    <strong>體力指數：</strong>⭐☆☆☆☆ (非常輕鬆)<br>
+                    <strong>購物指數：</strong>⭐⭐⭐☆☆ (最後採購機會)<br>
+                    <strong>拍照指數：</strong>⭐⭐⭐☆☆ (悠閒回顧)
+                </div>
+            </div>
+        </div>
+
+        <!-- SUMMARY -->
+        <div style="background: white; padding: 30px; border-radius: 12px; margin-top: 30px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+            <h2 style="color: #208084; font-size: 1.8em; margin-bottom: 20px;">📊 整體行程統計</h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px;">
+                <div style="background: linear-gradient(135deg, rgba(32, 128, 132, 0.1), rgba(212, 165, 116, 0.1)); padding: 20px; border-radius: 8px; border-left: 4px solid #208084;">
+                    <div style="font-size: 0.9em; color: #666; margin-bottom: 5px;">🏨 住宿</div>
+                    <div style="font-weight: 700; color: #208084; font-size: 1.3em;">4 晚</div>
+                    <div style="font-size: 0.8em; color: #999;">靜安崑崙大酒店</div>
+                </div>
+                <div style="background: linear-gradient(135deg, rgba(32, 128, 132, 0.1), rgba(212, 165, 116, 0.1)); padding: 20px; border-radius: 8px; border-left: 4px solid #208084;">
+                    <div style="font-size: 0.9em; color: #666; margin-bottom: 5px;">🍽️ 餐廳預訂</div>
+                    <div style="font-weight: 700; color: #208084; font-size: 1.3em;">3 家</div>
+                    <div style="font-size: 0.8em; color: #999;">錦福軒、敘宴、3號倉庫</div>
+                </div>
+                <div style="background: linear-gradient(135deg, rgba(32, 128, 132, 0.1), rgba(212, 165, 116, 0.1)); padding: 20px; border-radius: 8px; border-left: 4px solid #208084;">
+                    <div style="font-size: 0.9em; color: #666; margin-bottom: 5px;">🎫 景點門票</div>
+                    <div style="font-weight: 700; color: #208084; font-size: 1.3em;">5+ 個</div>
+                    <div style="font-size: 0.8em; color: #999;">觀景台、豫園、展覽等</div>
+                </div>
+                <div style="background: linear-gradient(135deg, rgba(32, 128, 132, 0.1), rgba(212, 165, 116, 0.1)); padding: 20px; border-radius: 8px; border-left: 4px solid #208084;">
+                    <div style="font-size: 0.9em; color: #666; margin-bottom: 5px;">💰 預估總預算</div>
+                    <div style="font-weight: 700; color: #208084; font-size: 1.3em;">¥4,000-6,000</div>
+                    <div style="font-size: 0.8em; color: #999;">人均 / 含住宿</div>
+                </div>
+            </div>
+
+            <div style="background: #fff9e6; padding: 20px; border-radius: 8px; border-left: 4px solid #ff9800;">
+                <h3 style="color: #ff9800; margin-bottom: 10px;">⚠️ 出發前必做清單</h3>
+                <ul style="margin: 0; padding-left: 20px; color: #333;">
+                    <li><strong>✓ 辦妥台胞證</strong></li>
+                    <li><strong>✓ 預訂敘宴 (最重要!出發前30天內)</strong></li>
+                    <li><strong>✓ 預訂錦福軒</strong></li>
+                    <li><strong>✓ 3號倉庫在線取號或現場排隊</strong></li>
+                    <li><strong>✓ 購買上海中心門票</strong></li>
+                    <li>✓ 開通漫遊或購網卡</li>
+                    <li>✓ 下載支付寶/微信</li>
+                    <li>✓ 下載高德地圖</li>
+                </ul>
+            </div>
+        </div>
+
+        <footer>
+            <h3>🎉 祝你有一趟完美的上海跨年之旅！</h3>
+            <p>記住：這份行程是你的指南，但不是死規定。隨時根據當天心情與體力調整。上海，我們見面囉！</p>
+        </footer>
+    </div>
+
+    <script>
+        function toggleDay(element) {
+            const content = element.nextElementSibling;
+            content.classList.toggle('collapsed');
+        }
+
+        function toggleAllDays() {
+            const allContents = document.querySelectorAll('.day-content');
+            const firstContent = allContents[0];
+            const isCollapsed = firstContent.classList.contains('collapsed');
+            
+            allContents.forEach(content => {
+                if (isCollapsed) {
+                    content.classList.remove('collapsed');
+                } else {
+                    content.classList.add('collapsed');
+                }
+            });
+        }
+
+        function switchTab(button, tabId) {
+            const parent = button.parentElement;
+            const contents = parent.nextElementSibling;
+            
+            document.querySelectorAll(`.${contents.className}`).forEach(el => {
+                el.classList.remove('active');
+            });
+            
+            parent.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            document.getElementById(tabId).classList.add('active');
+            button.classList.add('active');
+        }
+    </script>
+</body>
+</html>
